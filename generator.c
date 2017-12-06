@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<string.h>
 #include<math.h>
-#include<curses.h>
+#include<ncurses.h>
 #include<errno.h>
 
 #include<gsl/gsl_rng.h>			/* biblioteka GSL: Random Number Generators */
@@ -15,7 +15,7 @@ int main() {/*******************************************************************
 int errnum = 0;
 
 char ROOT[16][3] = {"Ab", "A", "B", "H", "C", "C#", "Db", "D", "D#", "Eb", "E", "F", "F#", "Gb", "G", "G#"}; 	/* No. of strings X maximimum length + 1 */
-char CHORD[6][4] = {"M", "m", "dim", "M7", "m7", "7"}; 	/// 'm7b5', 'dim7'};
+char CHORD[6][4] = {"M", "m", "dim", "M7", "m7", "7"}; 	/// "m7b5", "dim7", "sus2", "sus4"};
 /* Inicjalizacja RNG */
 gsl_rng * RNG;
 const gsl_rng_type * RNGtype;
@@ -45,8 +45,8 @@ while(play == 1)
 	chord = gsl_rng_uniform_int(RNG, 6);
 
 	clear();
-	printw("Press any key (except q) to generate a new chord or q to quit\n");
-	printw("=============================================================\n");
+	printw("Press q to quit or any other key to generate a new chord\n");
+	printw("========================================================\n");
 	printw("\n");
 	printw("%s%s", ROOT[root], CHORD[chord]);
 	refresh();
